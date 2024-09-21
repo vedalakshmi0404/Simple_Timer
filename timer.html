@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+    <center>
+<div id="timer">00:00:00</div>
+</div>
+<br>    
+<button class="Start" onclick="startTimer()">Start</button>
+<button class="Stop" onclick="stopTimer()">Stop</button>
+<br>
+<button class="Reset"  onclick="resetTimer()">Reset</button>
+<button class="Restart" onclick="restartTimer()">Restart</button>
+</div></center>
+<script>
+  let timerInterval;
+  let totalTimeInSeconds = 300; 
+  let timeRemaining = totalTimeInSeconds;
+  function startTimer() {
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+  function stopTimer() {
+    clearInterval(timerInterval);
+  }
+  function resetTimer() {
+    stopTimer();
+    timeRemaining = totalTimeInSeconds;
+    updateDisplay();
+  }
+  function restartTimer() {
+    resetTimer();
+    startTimer();
+  }
+  function updateTimer() {
+    if (timeRemaining > 0) {
+      timeRemaining--;
+      updateDisplay();
+    } else {
+      stopTimer();
+      alert("Time's up!");
+    }
+  }
+  function updateDisplay() {
+    const hours = Math.floor(timeRemaining / 3600);
+    const minutes = Math.floor((timeRemaining % 3600) / 60);
+    const seconds = timeRemaining % 60;
+    const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    document.getElementById('timer').innerText = formattedTime;
+  }
+updateDisplay();
+  $("div").lettering();
+</script>
+</body>
+</html>
+ 
